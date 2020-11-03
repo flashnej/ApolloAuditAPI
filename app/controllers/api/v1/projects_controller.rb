@@ -31,7 +31,7 @@ class Api::V1::ProjectsController < ApplicationController
       end
     end
 
-    data = JSON.parse(`{
+    data = JSON.parse('{
       "personalizations": [
         {
           "to": [
@@ -51,7 +51,7 @@ class Api::V1::ProjectsController < ApplicationController
           "value": "Hello, Email!"
         }
       ]
-    }`)
+    }')
     data[:attachments] = [
       {
         content: Base64.strict_encode64(csv),
