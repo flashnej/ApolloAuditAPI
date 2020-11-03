@@ -31,27 +31,27 @@ class Api::V1::ProjectsController < ApplicationController
       end
     end
 
-    data = JSON.parse('{
-      "personalizations": [
+    data = {
+      'personalizations': [
         {
-          "to": [
+          'to': [
             {
-              "email": "flashnej@gmail.com"
+              'email': auditor_email
             }
           ],
-          "subject": "Hello World from the SendGrid Ruby Library!"
+          'subject': 'Hello World from the SendGrid Ruby Library!'
         }
       ],
-      "from": {
-        "email": "apolloauditapp@gmail.com"
+      'from': {
+        'email': 'apolloauditapp@gmail.com'
       },
-      "content": [
+      'content': [
         {
-          "type": "text/plain",
-          "value": "Hello, Email!"
+          'type': 'text/plain',
+          'value': 'Hello, Email!'
         }
       ]
-    }')
+    }
     data[:attachments] = [
       {
         content: Base64.strict_encode64(csv),
