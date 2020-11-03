@@ -36,7 +36,7 @@ class Api::V1::ProjectsController < ApplicationController
         {
           "to": [
             {
-              "email": `auditor_email`
+              "email": "flashnej@gmail.com"
             }
           ],
           "subject": "Hello World from the SendGrid Ruby Library!"
