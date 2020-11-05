@@ -39,7 +39,7 @@ class Api::V1::ProjectsController < ApplicationController
               'email': auditor_email
             }
           ],
-          'subject': 'Hello World from the SendGrid Ruby Library!'
+          'subject': project_name +' Audit'
         }
       ],
       'from': {
@@ -48,7 +48,7 @@ class Api::V1::ProjectsController < ApplicationController
       'content': [
         {
           'type': 'text/plain',
-          'value': 'Hello, Email!'
+          'value': 'Your audit is attached'
         }
       ]
     }
