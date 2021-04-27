@@ -73,9 +73,12 @@ class Api::V1::ProjectsController < ApplicationController
       ]
       sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
       response = sg.client.mail._("send").post(request_body: data)
+
+      puts "_____________START OF THE RESPONSE!!!!!!_______________________________"
       puts response.status_code
       puts response.body
       puts response.headers
+      puts "_____________________END______________"
     end
   end
 
