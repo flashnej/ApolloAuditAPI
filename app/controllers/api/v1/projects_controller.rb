@@ -8,18 +8,18 @@ class Api::V1::ProjectsController < ApplicationController
 
   def create
     date = Time.new.strftime("%m/%d/%Y")
-    project_name = params["projectName"]
-    client_name = params["clientName"]
-    contact_name = params["contactName"]
-    phone_number = params["phoneNumber"]
-    address = params["address"]
-    city = params["city"]
-    sq_ft = params["sqFt"]
-    utility = params["utility"]
-    acct_num = params["acctNum"]
-    line_items = params["lineItems"]
-    auditor_email=params["useremail"]
-    auditor = params["user"]
+    params["projectName"] ? (project_name = params["projectName"]) : (project_name = "")
+    params["clientName"] ? (client_name = params["clientName"]) : (client_name = "")
+    params["contactName"] ? (contact_name = params["contactName"]) : (contact_name = "")
+    params["phoneNumber"] ? (phone_number = params["phoneNumber"]) : (phone_number = "")
+    params["address"] ? (address = params["address"]) : (address = "")
+    params["clientName"] ? (city = params["clientName"]) : (city = "")
+    params["sqFt"] ? (sq_ft = params["sqFt"]) : (sq_ft = "")
+    params["utility"] ? (utility = params["utility"]) : (utility = "")
+    params["acctNum"] ? (acct_num = params["acctNum"]) : (acct_num = "")
+    params["lineItems"] ? (line_items = params["lineItems"]) : (line_items = "")
+    params["useremail"] ? (auditor_email = params["useremail"]) : (auditor_email = "")
+    params["user"] ? (auditor = params["user"]) : (auditor = "")
 
     project = Project.new
     project.name = project_name
@@ -40,6 +40,17 @@ class Api::V1::ProjectsController < ApplicationController
         line_items.map do |line|
           csv << [line_number,line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7]]
           line_number += 1
+          line_item = LineItem.new
+          line_item.project = project
+          line_item.location = line[0]
+          line_item.hrs_per_year = line[1]
+          line_item.existing_fixture = line[2]
+          line_item.existin_qty = line[3]
+          line_item.proposed_fixture = line[4]
+          line_item.proposed_qty = line[5]
+          line_item.volt = line[6]
+          line_item.notes = line[7]
+          line_item.save
         end
       end
 
